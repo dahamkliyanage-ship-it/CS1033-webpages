@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS1033 | Abstract Data Structures</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the updated sub-style CSS -->
+<link rel="stylesheet" href="../..//style.css">
+<link rel="stylesheet" href="dataStr_Sub.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+  <div class="filetab">Abstract_Data_Structures<span class="ext">.html</span></div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#intro" class="ln-link"><span class="ln">01</span>The ADT Concept</a></li>
+      <li><a href="#stacks" class="ln-link"><span class="ln">02</span>The Stack (LIFO)</a></li>
+      <li><a href="#queues" class="ln-link"><span class="ln">03</span>The Queue (FIFO)</a></li>
+      <li><a href="#trees" class="ln-link"><span class="ln">04</span>Hierarchical Trees</a></li>
+      <li><a href="#traversal" class="ln-link"><span class="ln">05</span>Tree Traversal</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="kicker">TOPIC 11: ADVANCED ORGANIZERS</div>
+    <h1 class="title">Abstract Data <span class="kw">Structures</span></h1>
+    
+    <!-- SECTION 1: INTRO -->
+    <section id="intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        Lists, Tuples, and Dictionaries are built directly into Python. But what happens when you need to engineer a custom data engine? You build an Abstract Data Type (ADT)—a mathematical model of data defined entirely by its behavior as seen by the user[cite: 9].
+      </p>
+
+      <div class="cornerstone-grid">
+        <div class="c-card">
+          <div class="icon-wrap string">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          </div>
+          <h3>Linear vs. Hierarchical</h3>
+          <p>Stacks and Queues are <strong>linear</strong> data structures (elements are explicitly behind or in front of each other)[cite: 9]. Trees are <strong>hierarchical</strong>[cite: 9].</p>
+        </div>
+        <div class="c-card">
+          <div class="icon-wrap keyword">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <h3>The Interface</h3>
+          <p>An ADT hides the internal mechanics. The user only sees the operations they are allowed to perform, like <code>push()</code> or <code>pop()</code>[cite: 9].</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: STACKS -->
+    <section id="stacks">
+      <h2><span class="idx">02.</span> The Stack (LIFO)</h2>
+      <p>A stack is a Last-In/First-Out (LIFO) storage structure[cite: 9]. Insertion or removal occurs only at one specific position: the top of the stack[cite: 9]. Think of it like a stack of plates—you can only take the top one off.</p>
+
+      <div class="hanoi-visualizer" style="margin-top: 24px; margin-bottom: 24px;">
+        <div class="peg-container">
+          <div class="peg-pole"></div>
+          <div class="disk d-1">push()</div>
+          <div class="disk d-2">Item</div>
+          <div class="disk d-3">Item</div>
+          <div class="peg-label">LIFO STACK</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+          <span class="tag">&gt;&gt; CORE STACK OPERATIONS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>push(item)</strong>: Inserts an item to the very top[cite: 9].</li>
+            <li><strong>pop()</strong>: Removes and returns the top item[cite: 9].</li>
+            <li><strong>top() / peek()</strong>: Returns the top element without removing it, because in a stack, only the top item is visible to an outsider[cite: 9].</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 3: QUEUES -->
+    <section id="queues">
+      <h2><span class="idx">03.</span> The Queue (FIFO)</h2>
+      <p>A queue represents a familiar real-world line of people[cite: 9]. It is a First-In/First-Out (FIFO) storage structure where insertion happens at the tail, and removal happens at the head[cite: 9].</p>
+
+      <div class="callout string" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; CORE QUEUE OPERATIONS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>insert(item) / enqueue</strong>: Inserts an item at the tail[cite: 9].</li>
+            <li><strong>remove() / dequeue</strong>: Removes the item at the front (head)[cite: 9].</li>
+            <li><strong>front() &amp; rear()</strong>: Returns references to the elements at the head and tail, as those are the only items visible to an outsider[cite: 9].</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TREES -->
+    <section id="trees">
+      <h2><span class="idx">04.</span> Hierarchical Trees</h2>
+      <p>Most of the data we use in the real world has a hierarchical structure (like a file system or an academic record)[cite: 9]. A Tree ADT is visualized as an upside-down tree[cite: 9].</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>The Root</h3>
+          <p>The topmost node of the data structure. It is the single entry point for the entire tree[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>Children &amp; Parents</h3>
+          <p>Elements directly under a given element are its children, and the element directly above it is its parent[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>Leaves</h3>
+          <p>The terminal nodes at the very bottom of the structure that possess absolutely no children[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>Binary Trees</h3>
+          <p>A specific type of tree where every single element has a maximum of exactly 2 children (Left and Right)[cite: 9].</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: TREE TRAVERSAL -->
+    <section id="traversal">
+      <h2><span class="idx">05.</span> Tree Traversal</h2>
+      <p>Because trees are not linear, you cannot just iterate from index 0 to 10. You must use recursion to traverse them[cite: 9]. The two main strategies are Breadth-First (level by level) and Depth-First (diving to the deepest leaf first)[cite: 9].</p>
+
+      <div class="callout type" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; DEPTH-FIRST TRAVERSALS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>Preorder:</strong> Visit Root &rarr; Traverse Left &rarr; Traverse Right. (Great for creating a direct copy of a tree)[cite: 9].</li>
+            <li><strong>Inorder:</strong> Traverse Left &rarr; Visit Root &rarr; Traverse Right.</li>
+            <li><strong>Postorder:</strong> Traverse Left &rarr; Traverse Right &rarr; Visit Root. (Perfect for safely deleting a tree from the bottom up)[cite: 9].</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Ready for the next step? <span class="accent">Let's move on.</span></h2>
+      <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">You have mastered the foundational data structures and the mathematical models. Now it is time to wrap data and behavior into Classes.</p>
+      <a class="next-btn" href="oop_fundamentals.html">
+        Next: OOP Fundamentals
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

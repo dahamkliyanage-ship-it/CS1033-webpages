@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS1033 | Python Lists</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the new list-specific CSS -->
+<link rel="stylesheet" href="../..//style.css">
+<link rel="stylesheet" href="dataStr_sub.css">
+</head>
+<body>
+
+<div class="titlebar">
+  
+  <div class="filetab">Python Lists</div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#intro" class="ln-link"><span class="ln">01</span>The Dynamic Array</a></li>
+      <li><a href="#indexing" class="ln-link"><span class="ln">02</span>Indexing &amp; Slicing</a></li>
+      <li><a href="#mutability" class="ln-link"><span class="ln">03</span>Mutability in Memory</a></li>
+      <li><a href="#methods" class="ln-link"><span class="ln">04</span>Core List Methods</a></li>
+      <li><a href="#matrices" class="ln-link"><span class="ln">05</span>Nested Matrices</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    
+    <h1 class="title">Python <span class="kw">Lists</span></h1>
+    
+    <!-- SECTION 1: INTRODUCTION -->
+    <section id="intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        A Python list is a dynamically sized array. It can grow or shrink at runtime, making it useful for storing and organizing sequential data.
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">HETEROGENEOUS</span>
+          <p>Unlike standard arrays, Python lists can store different types of data in the same list, such as integers, strings, and other objects.</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">ITERABLE &amp; ORDERED</span>
+          <p>The values in a list are an ordered collection where each value has a specific position. Because you can access locations via index values, a list is an iterable collection.</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">MUTABLE</span>
+          <p>Lists are strictly mutable. This means the exact values contained in a list can be altered, swapped, or deleted after the initial creation of the list without changing the memory location.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INDEXING & SLICING -->
+    <section id="indexing">
+      <h2><span class="idx">02.</span> Indexing &amp; Slicing</h2>
+      <p>Lists in Python are ordered and indexed with 0 being the first index representing the element at the head of the list. But Python also gives you a massive shortcut: negative indexing.</p>
+
+      <div class="list-visualizer">
+        <div class="index-row negative">
+          <span>-5</span><span>-4</span><span>-3</span><span>-2</span><span>-1</span>
+        </div>
+        <div class="array-boxes">
+          <div class="a-box">10</div>
+          <div class="a-box type-txt">"CS"</div>
+          <div class="a-box">3.14</div>
+          <div class="a-box string-txt">True</div>
+          <div class="a-box">42</div>
+        </div>
+        <div class="index-row positive">
+          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>
+        </div>
+      </div>
+
+      <div class="callout string" style="margin-top: 30px;">
+          <span class="tag">&gt;&gt; THE COLON OPERATOR (:)</span>
+          <p>Python allows us to denote a specific range of elements using the colon symbol.</p>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><code style="color:var(--keyword);">List[:Index]</code> slices from the beginning to the denoted index.</li>
+            <li><code style="color:var(--keyword);">List[Index:]</code> slices from the specified index all the way to the end.</li>
+            <li><code style="color:var(--keyword);">List[::-1]</code> reverses the whole list instantly using the slicing operation.</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 3: MUTABILITY -->
+    <section id="mutability">
+      <h2><span class="idx">03.</span> Mutability in Memory</h2>
+      <p>Because lists are mutable, their contents can be completely changed while their storage in memory remains untouched. We can prove this using the <code style="color:var(--keyword);">id()</code> function, which returns the unique identity/memory address of an object.</p>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red);"></span>
+          <span class="dot" style="background:var(--warn);"></span>
+          <span class="dot" style="background:var(--string);"></span>
+          <span>mutability_check.py</span>
+        </div>
+        <div class="code-content">
+          <span style="color: var(--text-faint);"># The memory address stays exactly the same!</span><br>
+          L = [<span style="color: var(--warn);">0</span>, <span style="color: var(--warn);">1</span>, <span style="color: var(--warn);">2</span>, <span style="color: var(--warn);">3</span>]<br>
+          <span style="color: var(--keyword);">print</span>(L, <span style="color: var(--keyword);">id</span>(L)) <span style="color: var(--text-faint);"># Output: [0, 1, 2, 3] 140308181206528</span><br><br>
+          L[<span style="color: var(--warn);">1</span>] = <span style="color: var(--string);">'B'</span><br>
+          <span style="color: var(--keyword);">print</span>(L, <span style="color: var(--keyword);">id</span>(L)) <span style="color: var(--text-faint);"># Output: [0, 'B', 2, 3] 140308181206528</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CORE METHODS -->
+    <section id="methods">
+      <h2><span class="idx">04.</span> Core List Methods</h2>
+      <p>A list as an ADT provides a user with a set of typical functionalities to manipulate the data. Here are the heavy lifters you will use constantly:</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>append(value)</h3>
+          <p>Appends a single value to the tail (end) of the list.</p>
+        </div>
+        <div class="m-card">
+          <h3>insert(position, value)</h3>
+          <p>Allows the insertion of a value to a specific indexed location in the list.</p>
+        </div>
+        <div class="m-card">
+          <h3>extend(iterable)</h3>
+          <p>Extends the list we are handling with the elements present in another list (or iterable) given as the argument.</p>
+        </div>
+        <div class="m-card">
+          <h3>remove(value)</h3>
+          <p>Removes only the first matching element it encounters. Generates an error if the value is missing.</p>
+        </div>
+        <div class="m-card">
+          <h3>pop(position)</h3>
+          <p>Removes an element at a specified position. If blank, it defaults to removing the last element.</p>
+        </div>
+        <div class="m-card">
+          <h3>sort() &amp; reverse()</h3>
+          <p>Rearranges the contents into increasing order, or reorders the contents so they are in reverse based on position.</p>
+        </div>
+      </div>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--warn); border-radius:50%;"></span>
+          <span class="dot" style="background:var(--string); border-radius:50%;"></span>
+          <span>List Methods</span>
+        </div>
+        <div class="video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/0yySumZTxJ0?si=Goqw-j_jidsIPi0C" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- SECTION 5: NESTED MATRICES -->
+    <section id="matrices">
+      <h2><span class="idx">05.</span> Nested Lists as Matrices</h2>
+      <p>Because lists can contain other lists, they are perfectly suited to represent multi-dimensional matrices. Using nested loops, complex matrix operations (like addition) can be done easily.</p>
+
+      <div class="video-frame">
+        <div class="bar">
+          <span class="dot" style="background:var(--red);"></span>
+          <span class="dot" style="background:var(--warn);"></span>
+          <span class="dot" style="background:var(--string);"></span>
+          <span>matrix_addition.py</span>
+        </div>
+        <div class="code-content">
+          M1 = [[<span style="color: var(--warn);">1</span>, <span style="color: var(--warn);">2</span>], [<span style="color: var(--warn);">3</span>, <span style="color: var(--warn);">4</span>]]<br>
+          M2 = [[<span style="color: var(--warn);">5</span>, <span style="color: var(--warn);">6</span>], [<span style="color: var(--warn);">7</span>, <span style="color: var(--warn);">8</span>]]<br>
+          M3 = [[<span style="color: var(--warn);">0</span>, <span style="color: var(--warn);">0</span>], [<span style="color: var(--warn);">0</span>, <span style="color: var(--warn);">0</span>]]<br><br>
+          
+          <span style="color: var(--type);">for</span> idx <span style="color: var(--type);">in</span> <span style="color: var(--keyword);">range</span>(<span style="color: var(--warn);">2</span>):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--type);">for</span> idy <span style="color: var(--type);">in</span> <span style="color: var(--keyword);">range</span>(<span style="color: var(--warn);">2</span>):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;M3[idx][idy] = M1[idx][idy] + M2[idx][idy]<br><br>
+          
+          <span style="color: var(--keyword);">print</span>(M3) <span style="color: var(--text-faint);"># Output: [[6, 8], [10, 12]]</span>
+        </div>
+      </div>
+
+      <em><p>Watch these helpful <a href="https://youtube.com/playlist?list=PLBlnK6fEyqRjSgal6OIEfzK4upXvkHSxW&si=YgqFGWRIs4Oo-raz">explanations of lists</a> done by Neso Academy to gain more knowledge on how to use lists.</p></em>
+
+    </section>
+
+    <!-- ROUTING BUTTON TO SETS & TUPLES -->
+    <section class="cta">
+      <h2>Ready for the next step? <span class="accent">Let's move on.</span></h2>
+      <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">Lists are dynamic, but what if you need data that is permanently locked, or collections that strictly prevent duplicates?</p>
+      <a class="next-btn" href="tuples_sets.html">
+        Next: Tuples &amp; Sets
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

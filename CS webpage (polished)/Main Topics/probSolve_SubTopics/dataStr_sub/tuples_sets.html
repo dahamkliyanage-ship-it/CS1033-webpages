@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS1033 | Tuples &amp; Sets</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the new tuples/sets CSS -->
+<link rel="stylesheet" href="../..//style.css">
+<link rel="stylesheet" href="dataStr_Sub.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+  <div class="filetab">Tuples_Sets<span class="ext">.html</span></div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#tuples-intro" class="ln-link"><span class="ln">01</span>The Locked Record</a></li>
+      <li><a href="#unpacking" class="ln-link"><span class="ln">02</span>Unpacking &amp; Swapping</a></li>
+      <li><a href="#sets-intro" class="ln-link"><span class="ln">03</span>The Unique Collection</a></li>
+      <li><a href="#set-methods" class="ln-link"><span class="ln">04</span>Core Set Methods</a></li>
+      <li><a href="#set-math" class="ln-link"><span class="ln">05</span>Set Mathematics</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="kicker">TOPIC 10.2: THE LOCK &amp; KEY</div>
+    <h1 class="title">Tuples &amp; <span class="kw">Sets</span></h1>
+    
+    <!-- SECTION 1: TUPLES -->
+    <section id="tuples-intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        While lists are completely dynamic, sometimes you need data to be permanently locked in place. A tuple is defined as a finite, ordered list of elements that is strictly <strong>immutable</strong>. Once you create it, you cannot alter it.
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">N-TUPLE</span>
+          <p>Tuples are denoted mathematically by their size: a 1-tuple is a singleton, a 2-tuple is an ordered-pair, and a 3-tuple is a triplet. You can even have an empty 0-tuple.</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">THE COMMA QUIRK</span>
+          <p>Tuples are created with comma-separated values, typically grouped by parentheses <code>()</code>. However, to create a single-element tuple, parentheses aren't enough—you <em>must</em> include a trailing comma (e.g., <code>('test',)</code>).</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">MIXED TYPES</span>
+          <p>Just like lists, tuples are completely heterogeneous. You can pack integers, strings, and even other tuples into a single variable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: UNPACKING & SWAPPING -->
+    <section id="unpacking">
+      <h2><span class="idx">02.</span> Unpacking &amp; Swapping</h2>
+      <p>Because tuples are strictly ordered, Python allows you to easily "unpack" their contents into separate variables or use them to cleanly swap data without needing a temporary placeholder.</p>
+
+      <div class="split-grid" style="margin-top: 24px;">
+        <div class="video-frame" style="margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red);"></span>
+            <span class="dot" style="background:var(--warn);"></span>
+            <span class="dot" style="background:var(--string);"></span>
+            <span>unpacking.py</span>
+          </div>
+          <div class="code-content">
+            <span style="color: var(--text-faint);"># Unpacking elements into variables</span><br>
+            T = (<span style="color: var(--string);">'Dept'</span>, <span style="color: var(--string);">'of'</span>, <span style="color: var(--string);">'CSE'</span>)<br>
+            a, b, c = T<br><br>
+            <span style="color: var(--keyword);">print</span>(a, b, c) <span style="color: var(--text-faint);"># Output: Dept of CSE</span>
+          </div>
+        </div>
+
+        <div class="video-frame" style="margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red);"></span>
+            <span class="dot" style="background:var(--warn);"></span>
+            <span class="dot" style="background:var(--string);"></span>
+            <span>swapping.py</span>
+          </div>
+          <div class="code-content">
+            <span style="color: var(--text-faint);"># Flawless variable swapping</span><br>
+            a = <span style="color: var(--string);">'Alpha'</span><br>
+            b = <span style="color: var(--string);">'Bravo'</span><br><br>
+            (a, b) = (b, a) <span style="color: var(--text-faint);"># The Swap</span><br>
+            <span style="color: var(--keyword);">print</span>(a, b) <span style="color: var(--text-faint);"># Output: Bravo Alpha</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SETS -->
+    <section id="sets-intro">
+      <h2><span class="idx">03.</span> Sets: The Unique Collection</h2>
+      <p>In mathematics, a set is defined as a collection of distinct objects. Python takes this mathematical concept and turns it into a powerful Abstract Data Type (ADT).</p>
+
+      <div class="callout warn" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; THE 4 RULES OF SETS</span>
+          <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+            <li><strong>Unordered:</strong> Elements have no specific order or index positions.</li>
+            <li><strong>Iterable:</strong> You can loop through the collection.</li>
+            <li><strong>Mutable:</strong> You can add or remove items from the set itself.</li>
+            <li><strong>No Duplicates:</strong> The set will automatically destroy any duplicate values you try to insert.</li>
+          </ul>
+      </div>
+      
+      <div class="callout type">
+          <span class="tag">&gt;&gt; THE IMMUTABILITY CATCH</span>
+          <p>While the set <em>itself</em> is mutable, the individual elements inside the set <strong>cannot</strong> be of a mutable data type. You can put a tuple inside a set, but you cannot put a list or a dictionary inside a set.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SET METHODS -->
+    <section id="set-methods">
+      <h2><span class="idx">04.</span> Core Set Mechanics</h2>
+      <p>Because sets do not have indexes, you manipulate them differently than lists. You create them using curly brackets <code>{}</code> or the built-in <code>set()</code> function.</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>add() vs update()</h3>
+          <p>Use <code>.add()</code> to insert a single element. Use <code>.update()</code> to pass an iterable (like a list) and add multiple elements at once.</p>
+        </div>
+        <div class="m-card">
+          <h3>remove() vs discard()</h3>
+          <p>Both delete an element. However, <code>.remove()</code> will crash your program with an error if the element is missing, while <code>.discard()</code> fails silently without crashing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SET MATHEMATICS -->
+    <section id="set-math">
+      <h2><span class="idx">05.</span> Set Mathematics</h2>
+      <p>Sets are built for high-speed mathematical operations. Instead of writing massive loops to compare two databases, you can use these core geometric commands.</p>
+
+      <div class="set-math-grid">
+        <!-- Union -->
+        <div class="math-card">
+          <div class="venn-box">
+            <div class="circle c1 filled"></div>
+            <div class="circle c2 filled"></div>
+          </div>
+          <h3>Union ( A | B )</h3>
+          <p>Returns a new set containing <em>all</em> elements present in both A and B, combined.</p>
+        </div>
+
+        <!-- Intersection -->
+        <div class="math-card">
+          <div class="venn-box">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <div class="intersection-core"></div>
+          </div>
+          <h3>Intersection ( A &amp; B )</h3>
+          <p>Returns the largest set of elements that are strictly <em>common</em> to both A and B.</p>
+        </div>
+
+        <!-- Difference -->
+        <div class="math-card">
+          <div class="venn-box diff-box">
+            <div class="circle c1 filled"></div>
+            <div class="circle c2 overlay"></div>
+          </div>
+          <h3>Difference ( A - B )</h3>
+          <p>Returns all elements present in A that are <em>not</em> present in B[: 10].</p>
+        </div>
+
+        <!-- Symmetric Difference -->
+        <div class="math-card">
+          <div class="venn-box">
+            <div class="circle c1 filled-hollow"></div>
+            <div class="circle c2 filled-hollow"></div>
+          </div>
+          <h3>Symmetric Diff ( A ^ B )</h3>
+          <p>Returns elements present in either A or B, but strictly <em>excluding</em> the elements common to both.</p>
+        </div>
+      </div>
+      
+      <div class="callout string" style="margin-top: 30px;">
+          <span class="tag">&gt;&gt; BOOLEAN TESTS</span>
+          <p>You can also ask Python true/false questions about sets: <code>A.isdisjoint(B)</code> checks if they share absolutely no elements. <code>A.issubset(B)</code> checks if all of A is inside B.</p>
+      </div>
+    </section>
+
+    <!-- ROUTING BUTTON TO DICTIONARIES -->
+    <section class="cta">
+      <h2>Ready for the next step? <span class="accent">Let's move on.</span></h2>
+      <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">You know how to sequence data and guarantee uniqueness. Now it is time to map it for ultra-fast lookup.</p>
+      <a class="next-btn" href="dictionaries.html">
+        Next: Dictionaries
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </section>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

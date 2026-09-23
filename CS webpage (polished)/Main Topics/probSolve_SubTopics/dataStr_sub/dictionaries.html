@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS1033 | Python Dictionaries</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Linked to your global stylesheet and the unified CSS -->
+<link rel="stylesheet" href="../..//style.css">
+<link rel="stylesheet" href="dataStr_sub.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+  <div class="filetab">Dictionaries<span class="ext">.html</span></div>
+</div>
+
+<div class="layout">
+  <!-- Master Table of Contents Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-label">TABLE OF CONTENTS</div>
+    <ul class="toc">
+      <li><a href="#intro" class="ln-link"><span class="ln">01</span>Key-Value Pairs</a></li>
+      <li><a href="#creating" class="ln-link"><span class="ln">02</span>Creation &amp; Rules</a></li>
+      <li><a href="#manipulating" class="ln-link"><span class="ln">03</span>Adding &amp; Updating</a></li>
+      <li><a href="#removing" class="ln-link"><span class="ln">04</span>Removing Elements</a></li>
+      <li><a href="#accessing" class="ln-link"><span class="ln">05</span>Access &amp; Functions</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="kicker">TOPIC 10.3: THE FAST LOOKUP</div>
+    <h1 class="title">Python <span class="kw">Dictionaries</span></h1>
+    
+    <!-- SECTION 1: INTRO -->
+    <section id="intro" style="padding-top: 0; margin-top: 0;">
+      <p class="lead-text" style="margin-bottom: 40px; text-align: left;">
+        Both the primary data types and structured types like lists, tuples, and sets store each data element as a single value[cite: 9]. In contrast, the dictionary data type stores each data element as a pair of values called a <strong>key</strong> and a <strong>value</strong>[cite: 9].
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card type-border">
+          <span class="tag" style="background: rgba(187,154,247,.15); color: var(--type);">THE KEY</span>
+          <p>The key is used to handle the storing of data elements in an optimized manner[cite: 9]. Crucially, the key in a dictionary must be entirely unique and it must be of an immutable data type[cite: 9].</p>
+        </div>
+        <div class="pillar-card warn-border">
+          <span class="tag" style="background: rgba(224,175,104,.15); color: var(--warn);">THE VALUE</span>
+          <p>Unlike keys, the values in a dictionary can be of absolutely any data type and can be freely duplicated throughout the structure[cite: 9].</p>
+        </div>
+        <div class="pillar-card string-border">
+          <span class="tag" style="background: rgba(158,206,106,.15); color: var(--string);">THE LOOKUP</span>
+          <p>This structure maps the key-part directly to the value-part, allowing you to access the values in a dictionary incredibly efficiently, just like searching for a word in a real-world dictionary[cite: 9].</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CREATING & RULES -->
+    <section id="creating">
+      <h2><span class="idx">02.</span> Creation &amp; Structure</h2>
+      <p>There are two main ways to forge a dictionary in Python: grouping a collection of comma-separated data elements inside curly brackets <code>{}</code>, or using the built-in <code>dict()</code> function[cite: 9]. Each element inside is separated by a colon <code>key: value</code>[cite: 9].</p>
+
+      <!-- Custom Key-Value Visualizer -->
+      <div class="dict-visualizer">
+        <div class="dict-row">
+          <div class="d-key"><span class="k-label">Key (Unique/Immutable)</span><br><span class="k-val string-txt">"1D"</span></div>
+          <div class="d-arrow">━━━ MAPS TO ━━▶</div>
+          <div class="d-val"><span class="v-label">Value (Any Type)</span><br><span class="v-val">"Curve"</span></div>
+        </div>
+        <div class="dict-row">
+          <div class="d-key"><span class="k-val string-txt">"2D"</span></div>
+          <div class="d-arrow">━━━ MAPS TO ━━▶</div>
+          <div class="d-val"><span class="v-val">"Surface"</span></div>
+        </div>
+        <div class="dict-row">
+          <div class="d-key"><span class="k-val warn-txt">1</span></div>
+          <div class="d-arrow">━━━ MAPS TO ━━▶</div>
+          <div class="d-val"><span class="v-val type-txt">['Point', 'Line', 'Plane']</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ADDING & UPDATING -->
+    <section id="manipulating">
+      <h2><span class="idx">03.</span> Adding &amp; Updating Elements</h2>
+      <p>You can push new data into your dictionary or update existing data using two distinct methods: direct key access or the built-in <code>update()</code> function[cite: 9].</p>
+
+      <div class="split-grid" style="margin-top: 24px;">
+        <div class="video-frame" style="margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red);"></span>
+            <span class="dot" style="background:var(--warn);"></span>
+            <span class="dot" style="background:var(--string);"></span>
+            <span>direct_access.py</span>
+          </div>
+          <div class="code-content">
+            <span style="color: var(--text-faint);"># Directly assigning via keys</span><br>
+            TT = {} <span style="color: var(--text-faint);"># Empty Dictionary</span><br>
+            TT[<span style="color: var(--warn);">1</span>] = <span style="color: var(--string);">'Programming'</span><br>
+            TT[<span style="color: var(--warn);">2</span>] = <span style="color: var(--string);">'Mathematics'</span><br><br>
+            <span style="color: var(--text-faint);"># Updating an existing key</span><br>
+            TT[<span style="color: var(--warn);">1</span>] = <span style="color: var(--string);">'CS Programming'</span>
+          </div>
+        </div>
+
+        <div class="video-frame" style="margin: 0;">
+          <div class="bar">
+            <span class="dot" style="background:var(--red);"></span>
+            <span class="dot" style="background:var(--warn);"></span>
+            <span class="dot" style="background:var(--string);"></span>
+            <span>update_method.py</span>
+          </div>
+          <div class="code-content">
+            <span style="color: var(--text-faint);"># Passing an iterable list of pairs</span><br>
+            TT.update([(<span style="color: var(--warn);">1</span>, <span style="color: var(--string);">'CS Programming'</span>)])<br><br>
+            <span style="color: var(--text-faint);"># Passing another dictionary</span><br>
+            TT.update({<span style="color: var(--warn);">5</span>: <span style="color: var(--string);">'Mechanics'</span>})<br><br>
+            <span style="color: var(--text-faint);"># If the key isn't present, it adds it as a new element.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: REMOVING -->
+    <section id="removing">
+      <h2><span class="idx">04.</span> Removing Elements</h2>
+      <p>In Python, there are exactly 4 methods to completely obliterate data from a dictionary[cite: 9]. Use them wisely.</p>
+
+      <div class="method-grid">
+        <div class="m-card">
+          <h3>del Dict[key]</h3>
+          <p>Deletes a specific entry using its key[cite: 9]. You can also use <code>del Dict</code> to wipe the entire dictionary out of existence, causing an error if you try to access it later[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>pop(key)</h3>
+          <p>Removes a specific entry using the key, but crucially, it <em>returns</em> the data value before deleting the full entry[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>popitem()</h3>
+          <p>Removes and returns an arbitrary element as a tuple pair[cite: 9]. In practice, it usually removes the very last item added to the dictionary[cite: 9].</p>
+        </div>
+        <div class="m-card">
+          <h3>clear()</h3>
+          <p>Unlike <code>del</code>, the <code>clear()</code> method deletes all items at once, leaving behind a perfectly empty but still accessible dictionary in your program[cite: 9].</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ACCESS & FUNCTIONS -->
+    <section id="accessing">
+      <h2><span class="idx">05.</span> Accessing Data &amp; Functions</h2>
+      <p>When pulling data out of a dictionary, using the index operator <code>Dict[key]</code> works perfectly, but it will trigger a fatal run-time error if the key doesn't exist[cite: 9]. The safer route is the <code>get()</code> function.</p>
+
+      <div class="callout type" style="margin-top: 24px;">
+          <span class="tag">&gt;&gt; THE SAFE LOOKUP: get()</span>
+          <p>The built-in <code>get()</code> function attempts to find the key. If a matching key is not found, it simply returns <code>None</code> instead of generating a program-crashing error[cite: 9].</p>
+      </div>
+
+      <h3 style="color: #fff; font-family: var(--sans); margin-top: 40px;">Essential Dictionary Methods</h3>
+      <ul style="color: var(--text-primary); margin-top: 10px; padding-left: 20px; line-height: 1.8;">
+        <li><code style="color:var(--keyword);">len(dict)</code>: Returns the total number of items in the dictionary[cite: 9].</li>
+        <li><code style="color:var(--keyword);">dict.keys()</code>: Returns a new object containing the complete set of keys[cite: 9].</li>
+        <li><code style="color:var(--keyword);">dict.values()</code>: Returns a new object containing the complete set of values[cite: 9].</li>
+        <li><code style="color:var(--keyword);">dict.items()</code>: Returns a new object containing the set of items, packaged as tuples[cite: 9].</li>
+        <li><code style="color:var(--keyword);">dict.setdefault(key, value)</code>: Returns the value if the key exists. If it doesn't, it creates the key and sets it to the provided value[cite: 9].</li>
+      </ul>
+    </section>
+
+    <!-- LEVEL UP CTA -->
+    <div class="callout string" style="margin: 64px auto 0; text-align: left;">
+        <span class="tag">&gt;&gt; LEVEL UP</span>
+        <p>Ready to dive deeper and get your hands dirty with actual code? Put your logic to the test and master the syntax with this interactive masterclass: <a href="https://www.w3schools.com/python/" target="_blank" style="color: var(--keyword); text-decoration: underline; font-weight: 600;">W3Schools: Python Tutorial</a>.</p>
+    </div>
+
+  </main>
+</div>
+
+<!-- Scroll Spy Script -->
+<script>
+  const links = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main section');
+  const map = new Map();
+  links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
